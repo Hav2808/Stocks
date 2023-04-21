@@ -21,10 +21,3 @@ class StockViewSet(ModelViewSet):
     serializer_class = StockSerializer
     filter_backends = [DjangoFilterBackend]
     pagination_class = LimitOffsetPagination
-
-    def get_queryset(self):
-        queryset = Stock.objects.all()
-        product = self.request.query_params.get('products')
-        if product is not None:
-            queryset = queryset.filter(product__id=product)
-        return queryset
